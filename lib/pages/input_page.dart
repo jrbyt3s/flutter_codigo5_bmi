@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo5_bmi/pages/result_page.dart';
 import 'package:flutter_codigo5_bmi/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,7 +16,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedOption = Gender.male;
   int height = 165;
-
+  int weight = 55;
+  int age = 25;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,35 +114,79 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: kCardColor,
-                    childCard: Center(),
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("WEIGHT", style: TextStyle(fontSize: 20)),
+                        Text(weight.toString(),
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InputIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                weight--;
+                                setState(() {});
+                              },
+                            ),
+                            InputIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                weight++;
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     color: kCardColor,
-                    childCard: Container(),
+                    childCard: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Age", style: TextStyle(fontSize: 20)),
+                        Text(age.toString(),
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InputIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                age--;
+                                setState(() {});
+                              },
+                            ),
+                            InputIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                age++;
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           //Botón
-          Container(
-            height: 80.0,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 12.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: kPrimaryColor,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: const Text(
-              "CALCULATE",
-              style: TextStyle(
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          NavigatorButton(
+            title: "CALCULATE",
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultPage()));
+            },
           ),
         ],
       ),
